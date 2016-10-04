@@ -1,0 +1,26 @@
+{
+  "name": "gulp-hash-cachebuster",
+  "version": "0.0.1",
+  "description": "My custom cachebuster passing a real hash param to assets in html ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasmonnier/gulp-hash-cachebuster.git"
+  },
+  "author": "Jonas Monnier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonasmonnier/gulp-hash-cachebuster/issues"
+  },
+  "homepage": "https://github.com/jonasmonnier/gulp-hash-cachebuster#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "md5-file": "^3.1.1"
+  }
+}
