@@ -51,10 +51,9 @@ var gulpHashCacheBuster = function(options)
             return cb(null, file);
         }
 
-        var root = path.dirname(file.path);
         if (file.isBuffer())
         {
-            file.contents = new Buffer(bust(root, file.contents.toString()));
+            file.contents = new Buffer(bust(path.dirname(file.path), file.contents.toString()));
         }
         if (file.isStream()) {
             //file.contents = file.contents.pipe(prefixStream(prefixText));
