@@ -25,11 +25,13 @@ var bust = function(fileRoot, fileContents)
         assets.push(scripts[i].attribs.src);
     }
 
-    var src;
+    var asset;
+    var assetCleanPath;
     for (var i = 0; i < assets.length; i++) {
-        src = assets[i];
-        if (src != undefined && !protocolRegEx.test(src)) {
-            fileContents = fileContents.replace(src, src + '?hash=' + md5File.sync(fileRoot+"/"+src));
+        asset = assets[i];
+        assetCleanPath = asset.replace(/(\?|&)hash=[0-9a-z]{32}/, '');
+        if (asset != undefined && !protocolRegEx.test(asset)) {
+            fileContents = fileContents.replace(asset, assetCleanPath + '?hash=' + md5File.sync(fileRoot+"/"+assetCleanPath));
         }
     }
 
