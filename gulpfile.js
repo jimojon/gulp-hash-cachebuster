@@ -8,6 +8,11 @@ gulp.task('css', function () {
 
 gulp.task('html', ['css'], function () {
     return gulp.src('./test/src/index.html')
+        .pipe(gulp.dest('./test/build/'));
+});
+
+gulp.task('cachebust', function () {
+    return gulp.src('./test/build/index.html')
         .pipe(cachebust())
         .pipe(gulp.dest('./test/build/'));
 });
