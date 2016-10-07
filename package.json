@@ -1,7 +1,7 @@
 {
   "name": "gulp-hash-cachebuster",
   "version": "0.1.5",
-  "description": "Cachebuster gulp plugin using the MD5-sum of each asset as hash param.",
+  "description": "Cachebuster plugin for gulp",
   "keywords": [
     "gulpplugin",
     "cache",
