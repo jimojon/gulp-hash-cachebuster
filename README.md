@@ -5,7 +5,7 @@ Cachebusting plugin for [Gulp](https://github.com/gulpjs/gulp).
 ## Install
 
 ```
-npm install npm install https://github.com/jonasmonnier/gulp-hash-cachebuster --save-dev
+npm install gulp-hash-cachebuster --save-dev
 ```
 
 ## Features
@@ -26,10 +26,10 @@ Becomes
 
 ## Use 
 ```
-gulp.task('cachebust', function () {
-    return gulp.src('./test/build/index.html')
+gulp.task('cachebust', ['html'], function () {
+    return gulp.src('./build/index.html')
         .pipe(cachebust())
-        .pipe(gulp.dest('./test/build/'));
+        .pipe(gulp.dest('./build/'));
 });
 ```
 
