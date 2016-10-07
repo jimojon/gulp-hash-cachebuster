@@ -1,8 +1,8 @@
-# gulp-hash-cachebuster [![Build Status](https://travis-ci.org/jonasmonnier/gulp-hash-cachebuster.svg?branch=master)](https://travis-ci.org/jonasmonnier/gulp-hash-cachebuster) [![Dependency Status](https://gemnasium.com/badges/github.com/jonasmonnier/gulp-hash-cachebuster.svg)](https://gemnasium.com/github.com/jonasmonnier/gulp-hash-cachebuster)
+# gulp-hash-cachebuster 
 
 Cachebusting plugin for [Gulp](https://github.com/gulpjs/gulp).  
 
-https://www.npmjs.com/package/gulp-hash-cachebuster
+[![Build Status](https://travis-ci.org/jonasmonnier/gulp-hash-cachebuster.svg?branch=master)](https://travis-ci.org/jonasmonnier/gulp-hash-cachebuster) [![Dependency Status](https://gemnasium.com/badges/github.com/jonasmonnier/gulp-hash-cachebuster.svg)](https://gemnasium.com/github.com/jonasmonnier/gulp-hash-cachebuster)
 
 ## Install
 
