@@ -32,3 +32,9 @@ gulp.task('cachebust', function () {
         .pipe(gulp.dest('./test/build/'));
 });
 ```
+
+## Test 
+```
+npm install -g mocha
+npm test
+```

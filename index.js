@@ -56,13 +56,12 @@ var gulpHashCacheBuster = function(options)
             return cb(null, file);
         }
 
-        if (file.isBuffer())
-        {
+        if (file.isBuffer()) {
             file.contents = new Buffer(bust(path.dirname(file.path), file.contents.toString()));
         }
+
         if (file.isStream()) {
-            //file.contents = file.contents.pipe(prefixStream(prefixText));
-            throw new PluginError(PLUGIN_NAME, 'Streaming not supported');
+            this.emit('error', new PluginError(PLUGIN_NAME, 'Streaming not supported'));
         }
 
         cb(null, file);
