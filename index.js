@@ -29,9 +29,12 @@ var bust = function(fileRoot, fileContents)
     var assetCleanPath;
     for (var i = 0; i < assets.length; i++) {
         asset = assets[i];
-        assetCleanPath = asset.replace(/(\?|&)hash=[0-9a-z]{32}/, '');
-        if (asset != undefined && !protocolRegEx.test(asset)) {
-            fileContents = fileContents.replace(asset, assetCleanPath + '?hash=' + md5File.sync(fileRoot+"/"+assetCleanPath));
+
+        if (asset != undefined) {
+            assetCleanPath = asset.replace(/(\?|&)hash=[0-9a-z]{32}/, '');
+            if (!protocolRegEx.test(asset)) {
+                fileContents = fileContents.replace(asset, assetCleanPath + '?hash=' + md5File.sync(fileRoot + "/" + assetCleanPath));
+            }
         }
     }
 
