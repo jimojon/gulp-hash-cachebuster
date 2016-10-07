@@ -6,12 +6,17 @@ gulp.task('css', function () {
         .pipe(gulp.dest('./test/build/css/'));
 });
 
-gulp.task('html', ['css'], function () {
+gulp.task('js', function () {
+    return gulp.src('./test/src/hello.js')
+        .pipe(gulp.dest('./test/build/'));
+});
+
+gulp.task('html', ['css', 'js'], function () {
     return gulp.src('./test/src/index.html')
         .pipe(gulp.dest('./test/build/'));
 });
 
-gulp.task('cachebust', function () {
+gulp.task('cachebust', ['html'], function () {
     return gulp.src('./test/build/index.html')
         .pipe(cachebust())
         .pipe(gulp.dest('./test/build/'));
