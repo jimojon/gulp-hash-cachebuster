@@ -34,7 +34,8 @@ describe('gulp-hash-cachebuster', function() {
 
     it('should emit an error on non-existent asset', function (done) {
         var fakeFile = new File({
-            contents: new Buffer('<!DOCTYPE html><html lang="en"><script src="nothing">console.log("Hello")</script><link></link></html>')
+            contents: new Buffer('<!DOCTYPE html><html lang="en"><script src="null">console.log("Hello")</script><link></link></html>'),
+            path: __dirname + '/fixture/src/test.html'
         });
 
         var cb = cachebust();
