@@ -1,4 +1,4 @@
-# gulp-hash-cachebuster
+# gulp-hash-cachebuster [![Build Status](https://travis-ci.org/jonasmonnier/gulp-hash-cachebuster.svg?branch=master)](https://travis-ci.org/jonasmonnier/gulp-hash-cachebuster)
 
 Cachebusting plugin for [Gulp](https://github.com/gulpjs/gulp).
 
