@@ -48,4 +48,45 @@ describe('gulp-hash-cachebuster', function() {
         }
     });
 
+    it('should generate expected content', function (done)
+    {
+        var source = '<!DOCTYPE html>' +
+            '<head>' +
+            '   <link rel="stylesheet" href="css/hello.css">' +
+            '   <script src="hello.js"></script>' +
+            '   <script>' +
+            '       console.log("Oh yeah...");' +
+            '   </script>' +
+            '</head>' +
+            '</html>';
+
+        var fakeFile = new File({
+            contents: new Buffer(source),
+            path: __dirname + '/fixture/src/test.html'
+        });
+
+        var expect = '<!DOCTYPE html>' +
+            '<head>' +
+            '   <link rel="stylesheet" href="css/hello.css?hash=08c84b1b1dbe491f09c7c566d7aa7e20">' +
+            '   <script src="hello.js?hash=b251ed91e4a2f97555dabf78b8266c77"></script>' +
+            '   <script>' +
+            '       console.log("Oh yeah...");' +
+            '   </script>' +
+            '</head>' +
+            '</html>';
+        
+        var cb = cachebust();
+        cb.write(fakeFile);
+        cb.once('data', function(file)
+        {
+            // make sure it came out the same way it went in
+            assert(file.isBuffer());
+
+            // check the contents
+            assert.equal(file.contents.toString('utf8'), expect);
+            done();
+        });
+
+    });
+
 });
