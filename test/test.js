@@ -6,7 +6,7 @@ var cachebust = require('../');
 describe('gulp-hash-cachebuster', function() {
 
     it('should emit error on streamed file', function (done) {
-        gulp.src("test/src/index.html", { buffer: false })
+        gulp.src("test/fixture/src/index.html", { buffer: false })
             .pipe(cachebust())
             .on('error', function (err) {
                 assert.equal(err.message, 'Streaming not supported');
