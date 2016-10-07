@@ -26,7 +26,9 @@ Becomes
 
 ## Use 
 ```
-gulp.task('cachebust', ['html'], function () {
+var cachebust = require('gulp-hash-cachebuster');  
+
+gulp.task('cachebust', function () {
     return gulp.src('./build/index.html')
         .pipe(cachebust())
         .pipe(gulp.dest('./build/'));
