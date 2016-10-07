@@ -27,13 +27,24 @@ var bust = function(fileRoot, fileContents)
 
     var asset;
     var assetCleanPath;
+    var assetAbsolutePAth;
     for (var i = 0; i < assets.length; i++) {
         asset = assets[i];
 
         if (asset != undefined) {
             assetCleanPath = asset.replace(/(\?|&)hash=[0-9a-z]{32}/, '');
+            assetAbsolutePAth = fileRoot + "/" + assetCleanPath;
             if (!protocolRegEx.test(asset)) {
-                fileContents = fileContents.replace(asset, assetCleanPath + '?hash=' + md5File.sync(fileRoot + "/" + assetCleanPath));
+                try{
+                    var hash = md5File.sync(assetAbsolutePAth)
+                }catch(e){
+                    if(e.code == "ENOENT")
+                        throw(new PluginError(PLUGIN_NAME, "Asset not found: "+assetAbsolutePAth));
+                    else
+                        throw(e);
+                }
+
+                fileContents = fileContents.replace(asset, assetCleanPath + '?hash=' + hash);
             }
         }
     }
