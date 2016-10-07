@@ -16,7 +16,8 @@ describe('gulp-hash-cachebuster', function() {
 
     it('should ignore asset without src', function (done) {
         var fakeFile = new File({
-            contents: new Buffer('<!DOCTYPE html><html lang="en"><script>console.log("Hello")</script><link></link></html>')
+            contents: new Buffer('<!DOCTYPE html><html lang="en"><script>console.log("Hello")</script><link></link></html>'),
+            path: "test/fixture/src/test.html"
         });
 
         var cb = cachebust();
