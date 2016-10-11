@@ -1,6 +1,6 @@
 {
   "name": "gulp-hash-cachebuster",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Cachebuster plugin for gulp",
   "keywords": [
     "gulpplugin",
