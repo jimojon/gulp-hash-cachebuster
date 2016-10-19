@@ -8,7 +8,7 @@ var md5File = require('md5-file');
 // Consts
 const PLUGIN_NAME = 'gulp-hash-cachebuster';
 
-var bust = function(fileRoot, fileContents)
+var bust = function(module, fileRoot, fileContents)
 {
     // Test for http(s) and don't cache bust if (assumed) served from CDN
     var protocolRegEx = /^http(s)?/;
@@ -27,20 +27,23 @@ var bust = function(fileRoot, fileContents)
 
     var asset;
     var assetCleanPath;
-    var assetAbsolutePAth;
+    var assetAbsolutePath;
+    var hash;
     for (var i = 0; i < assets.length; i++) {
         asset = assets[i];
 
         if (asset != undefined) {
             assetCleanPath = asset.replace(/(\?|&)hash=[0-9a-z]{32}/, '');
-            assetAbsolutePAth = fileRoot + "/" + assetCleanPath;
+            assetAbsolutePath = fileRoot + "/" + assetCleanPath;
             if (!protocolRegEx.test(asset)) {
                 try{
-                    var hash = md5File.sync(assetAbsolutePAth)
+                    hash = md5File.sync(assetAbsolutePath)
                 }catch(e){
-                    if(e.code == "ENOENT")
-                        throw(new PluginError(PLUGIN_NAME, "Asset not found: "+assetAbsolutePAth));
-                    else
+                    hash = undefined;
+                    if(e.code == "ENOENT"){
+                        //gutil.log(gutil.colors.red("Asset not found: "+assetCleanPath));
+                        module.emit("warning", "Asset not found: "+assetCleanPath);
+                    }else
                         throw(e);
                 }
 
@@ -68,7 +71,7 @@ var gulpHashCacheBuster = function(options)
         }
 
         if (file.isBuffer()) {
-            file.contents = new Buffer(bust(path.dirname(file.path), file.contents.toString()));
+            file.contents = new Buffer(bust(this, path.dirname(file.path), file.contents.toString()));
         }
 
         if (file.isStream()) {

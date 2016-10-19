@@ -33,20 +33,15 @@ describe('gulp-hash-cachebuster', function() {
         });
     });
 
-    it('should emit an error on non-existent asset', function (done) {
-        var fakeFile = new File({
-            contents: new Buffer('<!DOCTYPE html><html lang="en"><script src="null">console.log("Hello")</script><link></link></html>'),
-            path: __dirname + '/fixture/src/test.html'
-        });
-
-        var cb = cachebust();
-        try{
-            cb.write(fakeFile);
-        }catch(e){
-            var message = "Asset not found:";
-            assert.equal(e.message.substr(0, message.length), message);
-            done();
-        }
+    it('should a warning on non-existent asset', function (done)
+    {
+        gulp.src("test/fixture/src/index.html")
+            .pipe(cachebust())
+            .on('warning', function (message) {
+                var expect = "Asset not found:";
+                assert.equal(message.substr(0, expect.length), expect);
+                done();
+            });
     });
 
     it('should generate expected content', function (done)
@@ -55,6 +50,7 @@ describe('gulp-hash-cachebuster', function() {
             '<head>' +
             '   <link rel="stylesheet" href="css/hello.css">' +
             '   <script src="hello.js"></script>' +
+            '   <script src="missing.js"></script>' +
             '   <script>' +
             '       console.log("Oh yeah...");' +
             '   </script>' +
@@ -70,6 +66,7 @@ describe('gulp-hash-cachebuster', function() {
             '<head>' +
             '   <link rel="stylesheet" href="css/hello.css?hash=08c84b1b1dbe491f09c7c566d7aa7e20">' +
             '   <script src="hello.js?hash=b251ed91e4a2f97555dabf78b8266c77"></script>' +
+            '   <script src="missing.js?hash=undefined"></script>' +
             '   <script>' +
             '       console.log("Oh yeah...");' +
             '   </script>' +

@@ -29,11 +29,16 @@ Becomes
 ## Use 
 ```js
 var gulp = require('gulp');  
+var gutil = require('gulp-util');
 var cachebust = require('gulp-hash-cachebuster');  
 
 gulp.task('cachebust', function () {
     return gulp.src('./build/*.html')
         .pipe(cachebust())
+        .on("warning", function(message){
+            // Log missing assets
+            gutil.log(gutil.colors.red(message));
+        })
         .pipe(gulp.dest('./build/'));
 });
 ```

@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var cachebust = require('.');
 
 gulp.task('css', function () {
@@ -18,6 +19,8 @@ gulp.task('html', ['css', 'js'], function () {
 
 gulp.task('cachebust', ['html'], function () {
     return gulp.src('./build/index.html')
-        .pipe(cachebust())
+        .pipe(cachebust()).on("warning", function(message){
+            gutil.log(gutil.colors.red(message));
+        })
         .pipe(gulp.dest('./build/'));
 });
